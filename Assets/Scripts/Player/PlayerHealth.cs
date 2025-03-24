@@ -11,15 +11,23 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] Sprite heartFull;
     [SerializeField] Sprite heartEmpty;
-    [SerializeField] List<Image> heartList = new List<Image>();
+    [SerializeField] GameObject mainUI; // ref to  main UI
+    private List<Image> heartImages = new List<Image>(); //list of heart images
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        currentHearts = maxHearts; //set initial health to full
-        UpdateHealth(); //update health UI
+        // Reset health on start
+        if (mainUI == null)
+        {
+            mainUI = GameObject.Find("MainUI"); // Find MainUI if it's not assigned
+        }
+
+        ResetHealth(); //reset health on start
+
     }
 
+    
     //damage taken method
     public void TakeDamage(int damageToTake)
     {
@@ -46,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
 
        public void UpdateHealth()
     {
-        int heartListLength = heartList.Count;
+        int heartListLength = heartImages.Count;
 
         Debug.Log("Heart List Length: " + heartListLength);  // Check if the list is filled
          Debug.Log("Current Hearts: " + currentHearts);       // Verify health value
@@ -57,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
         
         for(int i = 0; i < heartListLength; i++)
         {
-            if(heartList[i] ==null)
+            if(heartImages[i] ==null)
 
             { Debug.LogError("Heart at index " + i + " is not assigned!");
             return;  // Stop further execution if an item is null
@@ -65,18 +73,20 @@ public class PlayerHealth : MonoBehaviour
 
             if (i < currentHearts)
             {
-                heartList[i].sprite = heartFull;
+                heartImages[i].sprite = heartFull;
 
             }
             else
             {
-                heartList[i].sprite = heartEmpty;
+                heartImages[i].sprite = heartEmpty;
             }
         }
     }
-    // Update is called once per frame
-    void Update()
+    
+    public void ResetHealth()
     {
-        
+        currentHearts = maxHearts; //restore health
+        UpdateHealth();
     }
+
 }

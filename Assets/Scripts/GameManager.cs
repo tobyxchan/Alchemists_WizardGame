@@ -7,65 +7,111 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
-    // Static instance of the game manager which can be accessed from other scripts
-
     public static GameManager instance;
     private AudioSource audioSource;
     public GameObject player;
-    private Vector3 startingPosition; // Player initial spot
-    
-    public static bool hasPlayerWon = false; // Check for win state
+    private Vector3 startingPosition;
 
+    //score system
+    public int score = 0;
+    public TextMeshProUGUI scoreText; //ui ref to display score
+    public TextMeshProUGUI deathMessageText; //ref to death text
+    private PlayerHealth playerHealth;
+    public GameObject mainUI;
+
+    public bool hasPlayerWon = false;
 
     private void Awake()
     {
-        // We initialize the game manager, making sure only one instance exists and manager is same between scenes
-        // Check if an instance doesnt exist
+        // Initialize the game manager and make it persistent between scenes
         if (instance == null)
         {
-            // If not, set this to instance
-             instance = this;
-
-            // Make sure that game manager persists between scenes
-             DontDestroyOnLoad(gameObject);
-
-             // Sub to scene loaded event
-             SceneManager.sceneLoaded += OnSceneLoaded;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
         else
         {
-            Debug.Log("game manager instance exists, destroying duplicate");
-            // If any exists then destroy them
             Destroy(gameObject);
             return;
         }
     }
 
-
-    // Method for what happens when the scene loads
-    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        hasPlayerWon = false;
 
-        hasPlayerWon = false; // Reset win
+        // Ensure MainUI is persistent across scenes
+        if (mainUI == null)
+        {
+            mainUI = GameObject.Find("MainUI");
+            if (mainUI != null)
+            {
+                DontDestroyOnLoad(mainUI);  // Keep the MainUI between scenes
+            }
+        }
 
         player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             player.GetComponent<SpriteRenderer>().enabled = true;
 
-            startingPosition = player.transform.position;// Save initial position
+            // Hide death text
+            if (deathMessageText != null)
+            {
+                deathMessageText.gameObject.SetActive(false);
+            }
+
+            score = 0;
+            UpdateScoreUI();
         }
     }
 
-
-   public void GameOver()
+    // Handle score system
+    public void AddScore(int amount)
     {
-            if(player !=null)
+        score += amount;
+        UpdateScoreUI();
+    }
+
+    private void UpdateScoreUI()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString(); // Display score
+        }
+    }
+
+    // Handle Game Over
+    public void GameOver()
+    {
+        if (player != null)
         {
             // Disable sprite on death
             player.GetComponent<SpriteRenderer>().enabled = false;
-            Debug.Log("Successful disable of player");
+
+            // Show death message
+            if (deathMessageText != null)
+            {
+                deathMessageText.gameObject.SetActive(true);
+                deathMessageText.text = "You Died"; // Death text
+            }
+
+            // Restart level after a short delay
+            StartCoroutine(RestartSceneAfterDelay(2f));
+        }
+    }
+
+    public IEnumerator RestartSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // Reset health
+        playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.ResetHealth(); // Reset health and update UI
         }
     }
 }
