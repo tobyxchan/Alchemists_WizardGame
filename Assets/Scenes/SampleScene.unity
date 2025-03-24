@@ -3545,7 +3545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.75
-  fireballPrefab: {fileID: 6159613280172355515, guid: 628fda11b64c71b46abf7418ed917cab, type: 3}
+  fireballPrefab: {fileID: 8188528148793273884, guid: 628fda11b64c71b46abf7418ed917cab, type: 3}
   projectileSpawnPoint: {fileID: 184023839}
   projectileSpeed: 8
   facingDirection: 1
@@ -5474,6 +5474,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 244357452015084376, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 244357452015084376, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 244357452015084376, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 244357452015084376, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.15
       objectReference: {fileID: 0}
@@ -5513,9 +5525,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 244357452015084376, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487894238946203485, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8418f0aca0c60cb4fb56e036d63c30da, type: 3}
     - target: {fileID: 7269367081301288554, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
       propertyPath: m_Name
-      value: HeartCollect
+      value: PotionCollect
       objectReference: {fileID: 0}
     - target: {fileID: 7269367081301288554, guid: d11953160dabeeb4ebcfe2c5d06c39f6, type: 3}
       propertyPath: m_Layer
