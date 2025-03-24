@@ -8,64 +8,82 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
 
-    // Static instance of the game manager which can be accessed from other scripts
+    //static instance of the game manager which can be accessed from other scripts
 
     public static GameManager instance;
-    private AudioSource audioSource;
+    private AudioSource audioSource; 
+    public List<AudioClip> soundEffects; //SFX list/manager
+
     public GameObject player;
-    private Vector3 startingPosition; // Player initial spot
+    private Vector3 startingPosition; //player initial spot
     
-    public static bool hasPlayerWon = false; // Check for win state
+    public static bool hasPlayerWon = false; //check for win state
 
-
-    private void Awake()
+private void Awake()
     {
-        // We initialize the game manager, making sure only one instance exists and manager is same between scenes
-        // Check if an instance doesnt exist
+
+        //we initialize the game manager
+        //making sure only one instance exists and manager is same between scenes
+
+        //check if an instance doesnt exist
         if (instance == null)
         {
-            // If not, set this to instance
+            //if not, set this to instance
              instance = this;
 
-            // Make sure that game manager persists between scenes
+            //make sure that game manager persists between scenes
              DontDestroyOnLoad(gameObject);
 
-             // Sub to scene loaded event
+             //sub to scene loaded event
              SceneManager.sceneLoaded += OnSceneLoaded;
+             
         }
         else
         {
             Debug.Log("game manager instance exists, destroying duplicate");
-            // If any exists then destroy them
+            //if any exists then destroy them
             Destroy(gameObject);
             return;
         }
+       
+
     }
 
-
-    // Method for what happens when the scene loads
+    //method for what happens when the scene loads
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
 
-        hasPlayerWon = false; // Reset win
+        hasPlayerWon = false;//reset win
 
         player = GameObject.FindWithTag("Player");
-        if (player != null)
+        if (player !=null)
         {
             player.GetComponent<SpriteRenderer>().enabled = true;
 
-            startingPosition = player.transform.position;// Save initial position
+            startingPosition = player.transform.position;//save initial position
         }
     }
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
    public void GameOver()
     {
-            if(player !=null)
-        {
-            // Disable sprite on death
-            player.GetComponent<SpriteRenderer>().enabled = false;
-            Debug.Log("Successful disable of player");
-        }
+        if(player !=null)
+    {
+    //disable sprite on death
+    player.GetComponent<SpriteRenderer>().enabled = false;
+
+    Debug.Log("Successful disable of player");
     }
+    }
+
 }

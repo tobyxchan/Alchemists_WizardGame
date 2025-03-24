@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    [SerializeField] private int damage = 3;        // Damage dealt by the projectile
-    [SerializeField] private float lifetime = 2f;   // Lifetime of the projectile
+    [SerializeField] private int damage = 3; // Damage dealt by the projectile
+    [SerializeField] private float lifetime = 2f; // Lifetime of the projectile
 
 
+    // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, lifetime); //destroy object after lifetime ends
     }
 
-    private void Collision2D(Collider2D ballCollision)
+    private void OnCollisionEnter2D(Collider2D ballCollision)
     {
         if(ballCollision.CompareTag("Enemy"))
         {
-            Enemy enemy = ballCollision.GetComponent<Enemy>();  // Get enemy script
+            Enemy enemy = ballCollision.GetComponent<Enemy>();//get enemy script
             if(enemy != null)
             {
-                enemy.TakeDamage(damage); // Deal damage to enemy
+                enemy.TakeDamage(damage); //deal damage
             }
 
-            Destroy(gameObject); // Destroy projectile
+            Destroy(gameObject);//destroy projectile
         }
     }
 }

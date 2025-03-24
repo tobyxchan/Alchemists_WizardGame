@@ -14,9 +14,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 6f;
     float horizontalMovement;
 
-    [Header("Facing Direction")]
-    public int facingDirection = 1; // 1 for right, -1 for left
-  
     [Header("Jumping")]
     public float jumpPower = 6f;
 
@@ -45,12 +42,10 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.x < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            facingDirection = -1;  // Player facing left
         }
         else if (rb.velocity.x > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            facingDirection = 1;   // Player facing right
         }
         
     }
