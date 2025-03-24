@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
     }
 
     //if player is in contact with enemy deal 1 damage per second
-    private void OnCollisionStay2D(Collision2D enemyColliding)
+    private void OnTriggerStay2D(Collider2D enemyColliding)
     {
         if(enemyColliding.gameObject.CompareTag("Player"))
         {

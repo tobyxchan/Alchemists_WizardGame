@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     // References to Components
     public Rigidbody2D rb;
+    [SerializeField] public List<AudioClip> soundEffects; //SFX Manager
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
@@ -85,11 +86,13 @@ public class PlayerController : MonoBehaviour
             {
                 // If held down, jump at full power
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                PlayJumpSFX();
             }
                 // If not held down button, perform a smaller jump
                 else if (context.canceled)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                PlayJumpSFX();
             }
         }
     }
@@ -110,5 +113,11 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(groundCheckPosition.position, groundCheckSize);
+    }
+
+    public void PlayJumpSFX()
+    {
+        // When player jumps, play first sound effect in SFX list
+        AudioSource.PlayClipAtPoint(soundEffects[0], transform.position);
     }
 }

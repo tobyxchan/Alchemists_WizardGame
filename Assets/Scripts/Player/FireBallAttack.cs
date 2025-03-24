@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class FireBallAttack : MonoBehaviour
 {
-
-    [SerializeField] float attackDelay = 0.4f; //delay between attacks
-    [SerializeField] GameObject fireballPrefab; //fireball projectile
-    [SerializeField] Transform projectileSpawnPoint;// where it shoots from
-    [SerializeField] float projectileSpeed = 8f;//speed of ball
+    [SerializeField] float attackDelay = 0.4f;          // Delay between attacks
+    [SerializeField] GameObject fireballPrefab;         // Fireball projectile
+    [SerializeField] Transform projectileSpawnPoint;    // Where it shoots from
+    [SerializeField] float projectileSpeed = 8f;        // Speed of fireball
 
     private bool canAttack = true; 
-    public int facingDirection = 1; // 1 = right, -1 = left
-    private PlayerController player; //ref to player
+    public int facingDirection = 1;     // 1 = right, -1 = left
+    private PlayerController player;    //ref to player
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        player = GetComponent<PlayerController>(); //get ref to player script
+        player = GetComponent<PlayerController>(); // Ref to player script
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
         if( Input.GetMouseButtonDown(0)&& canAttack)
         {
             StartCoroutine(FireAttack());
         }
-        
     }
+
+
     private IEnumerator FireAttack()
     {
-        canAttack = false;//prevent spamming
+        canAttack = false;  // Prevent spamming
         GameObject fireball = Instantiate(fireballPrefab,projectileSpawnPoint.position,Quaternion.identity);
 
 
@@ -48,7 +47,7 @@ public class FireBallAttack : MonoBehaviour
         if (direction == -1)
             fireball.transform.localScale = new Vector3(-1, 1, 1);
 
-        yield return new WaitForSeconds(attackDelay); //wait for cooldown
+        yield return new WaitForSeconds(attackDelay); // Wait for cooldown
         canAttack = true;
     }
 }
