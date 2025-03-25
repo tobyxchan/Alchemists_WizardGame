@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
     public int facingDirection = 1; // 1 for right, -1 for left
   
     [Header("Jumping")]
-    public float jumpPower = 6f;
+    public float jumpPower = 8f;
+    private int jumpCount =0; //tracks jumps
+    private int maxJumps = 2;//allow only 2 jumps
 
     [Header("Ground Check")]
     public Transform groundCheckPosition;
@@ -42,6 +44,13 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
         Gravity();
+        
+        //reset jumps when hit ground
+        if(isGrounded())
+        {
+            jumpCount = 0;
+        }
+
         // Rotate player sprite based on direction they are moving in
         if (rb.velocity.x < 0)
         {
@@ -80,21 +89,20 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if(isGrounded())
-        {
-            if (context.performed)
+            if (context.performed && jumpCount < maxJumps)
             {
                 // If held down, jump at full power
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                jumpCount++;
                 PlayJumpSFX();
             }
                 // If not held down button, perform a smaller jump
-                else if (context.canceled)
+                else if (context.canceled && jumpCount < maxJumps)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
                 PlayJumpSFX();
             }
-        }
+        
     }
 
 

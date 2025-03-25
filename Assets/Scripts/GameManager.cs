@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             player.GetComponent<SpriteRenderer>().enabled = true;
+            playerHealth = player.GetComponent<PlayerHealth>();
+
+            //store start pos
+            startingPosition = player.transform.position;
 
             // Hide death text
             if (deathMessageText != null)
@@ -67,6 +71,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(player !=null && player.transform.position.y <-11f)
+
+        {
+            GameOver();
+        }
+    }
+    
     // Handle score system
     public void AddScore(int amount)
     {

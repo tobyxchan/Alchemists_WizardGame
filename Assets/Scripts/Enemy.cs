@@ -49,8 +49,14 @@ public class Enemy : MonoBehaviour
     {
         //if within detection range of player, move to player
         //the distance is calculated by comparing player and enemy positions
-        float distanceToPlayer = Vector2.Distance(transform.position, playerPos.position);
-        if (distanceToPlayer <= detectionRange && IsGrounded())
+        //must be on same y axis and within x axis range
+        float distanceToPlayerX = Mathf.Abs(playerPos.position.x - transform.position.x);
+        float distanceToPlayerY = Mathf.Abs(playerPos.position.y - transform.position.y);
+
+        //y range threshold
+        float yDetectionThreshold = 0.5f;
+        
+        if (distanceToPlayerX <= detectionRange && distanceToPlayerY < yDetectionThreshold && IsGrounded())
         {
             MoveToPlayer();
 
@@ -113,15 +119,13 @@ public class Enemy : MonoBehaviour
     {
         if(enemyColliding.gameObject.CompareTag("Player"))
         {
-            if (enemyColliding.gameObject.CompareTag("Player"))
-            {
                 //if attack space has elapsed allow more damage
                 if (Time.time >= lastDamageTime + attackSpacing)
                 {
                     playerHealth.TakeDamage(attackDamage); //deal damage
                     lastDamageTime = Time.time; //reset damage timer
                 }
-            }
+            
         }
     }
     private void Die()

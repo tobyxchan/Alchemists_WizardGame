@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireBallAttack : MonoBehaviour
 {
-    [SerializeField] float attackDelay = 0.4f;          // Delay between attacks
+    [SerializeField] float attackDelay = 0.3f;          // Delay between attacks
     [SerializeField] GameObject fireballPrefab;         // Fireball projectile
     [SerializeField] Transform projectileSpawnPoint;    // Where it shoots from
     [SerializeField] float projectileSpeed = 8f;        // Speed of fireball
