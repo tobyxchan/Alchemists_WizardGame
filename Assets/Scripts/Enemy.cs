@@ -4,33 +4,37 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //attributes
+    // Attributes
     [SerializeField] private int enemyMaxHealth = 9; //enemy health
     public float enemySpeed = 3f; //enemy speed
     public int attackDamage = 1; //amount of damage dealt
     public float detectionRange = 7f; //distance of enemy detection of player
     public float attackSpacing = 1f;// time between attacks
     private float lastDamageTime = 0f; //track when last damage dealt
-
     public int currentEnemyHealth; //enemy current health
 
-    //refs
+    
+
+    // References
     private Transform playerPos; //ref to where player is
     private Rigidbody2D rigid; //rb ref
     private PlayerHealth playerHealth;//ref to player health
-    private GameObject player; 
+    private GameObject player; // ref to player
+    private AudioSource audioSource; // ref to audio source
 
     private bool isWalking = false;//track movement
 
     [SerializeField] LayerMask groundLayerMask;//ground layer assigning
     [SerializeField] Transform groundCheck; //ref to groundcheck
+    [SerializeField] private AudioClip damageSFX;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         playerPos = GameObject.FindWithTag("Player").transform;
         rigid = GetComponent<Rigidbody2D>();
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        audioSource = GetComponent<AudioSource>();
 
         currentEnemyHealth = enemyMaxHealth; //set to max at start
     }
@@ -38,13 +42,17 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         enemyMaxHealth -= damage;
-        Debug.Log("enemy took damage");
+        Debug.Log($"Enemy took {damage} damage");
 
         if(enemyMaxHealth <=0)
         {
             Die();
         }
+
+        // Play damage SFX
+        SoundFXManager.instance.PlaySoundFXClip(damageSFX, transform, 1f);
     }
+
     void FixedUpdate()
     {
         //if within detection range of player, move to player
@@ -77,7 +85,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //move to player method
+    // Move to player method
     private void MoveToPlayer()
     {
         if(IsGrounded())
@@ -114,7 +122,7 @@ public class Enemy : MonoBehaviour
         return hit.collider !=null; //true if ground is detected
     }
 
-    //if player is in contact with enemy deal 1 damage per second
+    // If player is in contact with enemy deal 1 damage per second
     private void OnTriggerStay2D(Collider2D enemyColliding)
     {
         if(enemyColliding.gameObject.CompareTag("Player"))
@@ -128,6 +136,7 @@ public class Enemy : MonoBehaviour
             
         }
     }
+
     private void Die()
     {
         Destroy(gameObject);

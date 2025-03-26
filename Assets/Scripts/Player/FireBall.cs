@@ -25,8 +25,7 @@ public class FireBall : MonoBehaviour
 
             Destroy(gameObject); // Destroy projectile
         }
-
-        else if (ballCollision.CompareTag("Environment"))//destory when hitting walls/floor
+        else if (ballCollision.CompareTag("Environment"))// Destroy when hitting walls/floor
         {
             Destroy(gameObject);
         }

@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class FireBallAttack : MonoBehaviour
 {
-    [SerializeField] float attackDelay = 0.3f;          // Delay between attacks
+    [SerializeField] float attackDelay = 0.5f;          // Delay between attacks
     [SerializeField] GameObject fireballPrefab;         // Fireball projectile
     [SerializeField] Transform projectileSpawnPoint;    // Where it shoots from
     [SerializeField] float projectileSpeed = 8f;        // Speed of fireball
 
     private bool canAttack = true; 
     public int facingDirection = 1;     // 1 = right, -1 = left
-    private PlayerController player;    //ref to player
+    private PlayerController player;    // ref to player
+    private AudioSource audioSource;    // ref to audio source
 
+    [SerializeField] private AudioClip fireballSFX;
 
     void Start()
     {
         player = GetComponent<PlayerController>(); // Ref to player script
-
+        audioSource = GetComponent<AudioSource>(); // Ref to audio source
     }
 
 
@@ -45,7 +47,12 @@ public class FireBallAttack : MonoBehaviour
 
         // Flip fireball sprite if moving left
         if (direction == -1)
-            fireball.transform.localScale = new Vector3(-1, 1, 1);
+        {
+            fireball.transform.localScale = new Vector3(-1, 1, 1); 
+        }
+
+        // Play sound effect
+        SoundFXManager.instance.PlaySoundFXClip(fireballSFX, transform, 1f);
 
         yield return new WaitForSeconds(attackDelay); // Wait for cooldown
         canAttack = true;

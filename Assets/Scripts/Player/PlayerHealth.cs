@@ -13,7 +13,16 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Sprite heartEmpty;
     [SerializeField] GameObject mainUI; // ref to  main UI
     private List<Image> heartImages = new List<Image>(); //list of heart images
+    private AudioSource audioSource;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip damageSFX;
+    [SerializeField] private AudioClip deathSFX;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -24,7 +33,6 @@ public class PlayerHealth : MonoBehaviour
         }
 
         ResetHealth(); //reset health on start
-
     }
 
     
@@ -34,10 +42,12 @@ public class PlayerHealth : MonoBehaviour
         if(currentHearts > 0)
         {
             currentHearts -= damageToTake;
-            Debug.Log(currentHearts);
+            Debug.Log($"Current health: {currentHearts}");
+            SoundFXManager.instance.PlaySoundFXClip(damageSFX, transform, 1f);
         }
         if(currentHearts <=0)
         {
+            SoundFXManager.instance.PlaySoundFXClip(deathSFX, transform, 1f);
             GameManager.instance.GameOver();
         }
         UpdateHealth();

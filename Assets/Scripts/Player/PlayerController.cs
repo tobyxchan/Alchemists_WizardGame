@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     // References to Components
     public Rigidbody2D rb;
-    [SerializeField] public List<AudioClip> soundEffects; //SFX Manager
+    private AudioSource audioSource;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
@@ -33,10 +33,14 @@ public class PlayerController : MonoBehaviour
     public float maxFallSpeed = 18f;
     public float fallSpeedMultiplier = 2f;
 
-
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip jumpSFX;
+    
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -89,20 +93,20 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-            if (context.performed && jumpCount < maxJumps)
-            {
-                // If held down, jump at full power
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-                jumpCount++;
-                PlayJumpSFX();
-            }
-                // If not held down button, perform a smaller jump
-                else if (context.canceled && jumpCount < maxJumps)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-                PlayJumpSFX();
-            }
-        
+        if (context.performed && jumpCount < maxJumps)
+        {
+            // If held down, jump at full power
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            jumpCount++;
+        }
+            // If not held down button, perform a smaller jump
+            else if (context.canceled && jumpCount < maxJumps)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+
+        // Play Jump SFX
+        SoundFXManager.instance.PlaySoundFXClip(jumpSFX, transform, 1f);
     }
 
 
@@ -121,11 +125,5 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(groundCheckPosition.position, groundCheckSize);
-    }
-
-    public void PlayJumpSFX()
-    {
-        // When player jumps, play first sound effect in SFX list
-        AudioSource.PlayClipAtPoint(soundEffects[0], transform.position);
     }
 }

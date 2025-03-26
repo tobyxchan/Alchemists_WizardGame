@@ -4,36 +4,39 @@ using UnityEngine;
 
 public class HeartCollect : MonoBehaviour
 {
-    public int heartValue = 3; //amount of hearts gained after collect
+    public int heartValue = 3; // Amount of hearts gained after collect
 
-    private PlayerController player;//player ref
-    private PlayerHealth playerHealth;//health ref
+    private PlayerController player;    // Player ref
+    private PlayerHealth playerHealth;  // Health ref
+    private AudioSource audioSource;    // Audio source ref
 
-    // Start is called before the first frame update
+    [SerializeField] private AudioClip heartSFX;
+
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnTriggerEnter2D(Collider2D heartCollider)
     {
-        //get health
+        // Get health
         PlayerHealth playerHealth = heartCollider.GetComponent<PlayerHealth>();
         PlayerController player = heartCollider.GetComponent<PlayerController>();
 
-        if(heartCollider.CompareTag("Player"))//if player collects
+        if(heartCollider.CompareTag("Player"))// If player collects
         {
             if(playerHealth !=null)
             {
-                playerHealth.Heal(heartValue); //heal by collect value
-
+                // Heal by collect value
+                playerHealth.Heal(heartValue); 
+                // Play heal SFX
+                SoundFXManager.instance.PlaySoundFXClip(heartSFX, transform, 1f);
             }
             
             Destroy(gameObject);
