@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] Sprite heartFull;
     [SerializeField] Sprite heartEmpty;
-    [SerializeField] GameObject mainUI; // ref to  main UI
+    private GameObject mainUI; // ref to  main UI
     private List<Image> heartImages = new List<Image>(); //list of heart images
     private AudioSource audioSource;
 
@@ -32,10 +32,51 @@ public class PlayerHealth : MonoBehaviour
             mainUI = GameObject.Find("MainUI"); // Find MainUI if it's not assigned
         }
 
+        FindMainUI(); //find UI on start
         ResetHealth(); //reset health on start
     }
 
-    
+    void FindMainUI()
+    {
+        mainUI = GameObject.Find("MainUI"); //dynamically find UI
+
+        if(mainUI !=null)
+        {
+            PopulateHeartList(); //find heart images in UI
+
+        }
+        else
+        {
+            Debug.Log("main ui not found");
+        }
+    }
+    void PopulateHeartList()
+    {
+        heartImages.Clear(); //clear any existing refs
+
+        if(mainUI !=null)
+        {
+            Image[] heartUIElements = mainUI.GetComponentsInChildren<Image>();//find all images under main UI
+
+            foreach (Image heart in heartUIElements)
+            {
+                if(heart.gameObject.name.Contains("Heart"))//make sure its a heart image
+                {
+                    heartImages.Add(heart);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Main UI is not assigned or found");
+
+        }
+        if(heartImages.Count ==0)
+        {
+            Debug.Log("Player took damage. Current Hearts: " + currentHearts);
+
+        }
+    }
     //damage taken method
     public void TakeDamage(int damageToTake)
     {
@@ -57,6 +98,10 @@ public class PlayerHealth : MonoBehaviour
     //healing
     public void Heal(int amount)
     {
+        if(mainUI ==null) //if UI missing find again
+        {
+            FindMainUI();
+        }
         currentHearts += amount;
         if(currentHearts > maxHearts) currentHearts = maxHearts;
         UpdateHealth();
