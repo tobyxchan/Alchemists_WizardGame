@@ -16,6 +16,7 @@ public class GooSpawner : MonoBehaviour
 
     }
 
+//instantiate the goo prefab from the chosen location
     void Shoot()
     {
         if(gooPrefab !=null && spawnPoint !=null)

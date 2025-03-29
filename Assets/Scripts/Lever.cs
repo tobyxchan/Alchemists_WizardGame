@@ -58,15 +58,18 @@ public class Lever : MonoBehaviour
         }
     }
 
+//method to move the trapdoor back and forth to set positions after lever is pulled
     IEnumerator MoveTrapdoor(Vector3 targetPosition)
     {
         while(Vector3.Distance(trapdoor.position,targetPosition) > 0.01f)
         {
+            //move trapdoor to target position at set speed
             trapdoor.position = Vector3.MoveTowards(trapdoor.position, targetPosition, moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
+    //when in range of trigger, display text and allow interaction
     private void OnTriggerEnter2D(Collider2D levCollide)
     {
         if(levCollide.CompareTag("Player"))

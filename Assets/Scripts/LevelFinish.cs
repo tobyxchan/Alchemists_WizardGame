@@ -18,6 +18,7 @@ public class LevelFinish : MonoBehaviour
 
     }
 
+//if player enters trigger zone, "press E" text shows and sets in range to true
     private void OnTriggerEnter2D(Collider2D doorCollide)
     {
         if(doorCollide.CompareTag("Player"))
@@ -27,6 +28,7 @@ public class LevelFinish : MonoBehaviour
         }
     }
 
+//if you leave trigger zone it removes text and wont allow interaction
     private void OnTriggerExit2D(Collider2D doorNoCollide)
     {
         if(doorNoCollide.CompareTag("Player"))
@@ -45,6 +47,7 @@ public class LevelFinish : MonoBehaviour
         }
     }
 
+//temporary level complete setup for functioning prototype
     private void CompleteLevel()
     {
         playerSprite.enabled = false;

@@ -31,14 +31,15 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        playerPos = GameObject.FindWithTag("Player").transform;
-        rigid = GetComponent<Rigidbody2D>();
+        playerPos = GameObject.FindWithTag("Player").transform; //find player location
+        rigid = GetComponent<Rigidbody2D>(); //get rigid body
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         audioSource = GetComponent<AudioSource>();
 
         currentEnemyHealth = enemyMaxHealth; //set to max at start
     }
 
+    //method to deal damage to enemy. if enemy reaches 0 health they die
     public void TakeDamage(int damage)
     {
         enemyMaxHealth -= damage;
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour
         //y range threshold
         float yDetectionThreshold = 0.5f;
         
+        // logic for checking if enemy should be idle or moving
         if (distanceToPlayerX <= detectionRange && distanceToPlayerY < yDetectionThreshold && IsGrounded())
         {
             MoveToPlayer();
@@ -74,7 +76,7 @@ public class Enemy : MonoBehaviour
             Idle();
         }
 
-        //flip function
+        //flip sprite function
         if(playerPos.position.x < transform.position.x)
         {
             transform.rotation = Quaternion.Euler(0,180,0);

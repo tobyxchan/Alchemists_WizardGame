@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        //kill player if they fall below out of bounds zone
+    
         if(player !=null && player.transform.position.y <-11f)
 
         {
@@ -115,6 +117,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+//delay respawn to allow a moment after death to display text and set health to 0
     public IEnumerator RestartSceneAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

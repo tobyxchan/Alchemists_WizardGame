@@ -14,6 +14,7 @@ public class GreenGemCollect : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+//when triggered by player it will collect, add score and play sound
     private void OnTriggerEnter2D(Collider2D gemCollide)
     {
         if(gemCollide.CompareTag("Player"))
