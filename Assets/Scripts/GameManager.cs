@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText; //ui ref to display score
     public TextMeshProUGUI deathMessageText; //ref to death text
+    public TextMeshProUGUI startInfoText; //level start info text
+
     private PlayerHealth playerHealth;
     public GameObject mainUI;
 
     public bool hasPlayerWon = false;
+    private bool hasRecievedInput = false;
 
     private void Awake()
     {
@@ -69,6 +72,8 @@ public class GameManager : MonoBehaviour
             score = 0;
             UpdateScoreUI();
         }
+
+        StartInfo();
     }
 
     private void Update()
@@ -79,6 +84,12 @@ public class GameManager : MonoBehaviour
 
         {
             GameOver();
+        }
+
+        if(!hasRecievedInput && (Input.anyKeyDown || Input.GetMouseButtonDown(0)))
+        {
+            hasRecievedInput = true;
+            HideInfoText();
         }
     }
     
@@ -95,6 +106,29 @@ public class GameManager : MonoBehaviour
         {
             scoreText.text = score.ToString(); // Display score
         }
+    }
+
+
+    //info text at start of level
+    private void StartInfo()
+    {
+        if(startInfoText !=null)
+        {
+            
+            startInfoText.gameObject.SetActive(true);//show info text
+            hasRecievedInput = false; //reset input tracking
+        }
+
+    }
+
+    private void HideInfoText()
+    {
+       
+        if (startInfoText !=null)
+        {
+            startInfoText.gameObject.SetActive(false); //hide info
+        }
+
     }
 
     // Handle Game Over
