@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3530140510291948404}
   - component: {fileID: 3366708965673218661}
   - component: {fileID: 2671281625547385593}
+  - component: {fileID: 2471979230600942284}
+  - component: {fileID: 8327153266695640030}
   m_Layer: 0
   m_Name: fireballPrefab
   m_TagString: Fireball
@@ -163,3 +165,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   lifetime: 2
+--- !u!95 &2471979230600942284
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188528148793273884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4de09ba4e22a8641b8dfa3e4548a349, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &8327153266695640030
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8188528148793273884}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
