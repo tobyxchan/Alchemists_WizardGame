@@ -78,13 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //kill player if they fall below out of bounds zone
-    
-        if(player !=null && player.transform.position.y <-11f)
-
-        {
-            GameOver();
-        }
+        
 
         if(!hasRecievedInput && (Input.anyKeyDown || Input.GetMouseButtonDown(0)))
         {
