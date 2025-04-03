@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class FireBallAttack : MonoBehaviour
 {
-    [SerializeField] float attackDelay = 0.5f;          // Delay between attacks
+    [SerializeField] float attackDelay = 0.25f;          // Delay between attacks
     [SerializeField] GameObject fireballPrefab;         // Fireball projectile
     [SerializeField] Transform projectileSpawnPoint;    // Where it shoots from
     [SerializeField] float projectileSpeed = 8f;        // Speed of fireball
+
+    [SerializeField] int manaCost = 20; //cost per shot
 
     private bool canAttack = true; 
     public int facingDirection = 1;     // 1 = right, -1 = left
     private PlayerController player;    // ref to player
     private AudioSource audioSource;    // ref to audio source
+
+    private ManaBar manaBar; //ref to mana script
 
     [SerializeField] private AudioClip fireballSFX;
 
@@ -20,6 +24,7 @@ public class FireBallAttack : MonoBehaviour
     {
         player = GetComponent<PlayerController>(); // Ref to player script
         audioSource = GetComponent<AudioSource>(); // Ref to audio source
+        manaBar = GetComponent<ManaBar>(); //ref to mana
     }
 
 
@@ -27,7 +32,15 @@ public class FireBallAttack : MonoBehaviour
     {
         if( Input.GetMouseButtonDown(0)&& canAttack)
         {
-            StartCoroutine(FireAttack());
+            if(manaBar !=null && manaBar.UseMana(manaCost))//check mana before shooting
+            
+            {
+                StartCoroutine(FireAttack());
+            }
+            else
+            {
+                Debug.Log("not enough mana");
+            }
         }
     }
 
