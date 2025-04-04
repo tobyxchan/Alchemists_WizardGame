@@ -24,6 +24,22 @@ public class SpikeTrap : MonoBehaviour
                 }
             }
         }
+
+        if(spikeCollider.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy has died");
+            Enemy enemy = spikeCollider.GetComponent<Enemy>();
+
+            if(enemy !=null)
+            {
+                enemy.TakeDamage(damageAmount); //apply damage
+
+                if(enemy.currentEnemyHealth <=0)
+                {
+                    Destroy(spikeCollider.gameObject);
+                }
+            }
+        }
     }
 
 }

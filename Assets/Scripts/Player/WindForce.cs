@@ -30,7 +30,7 @@ public class WindForce : MonoBehaviour
                 {
                     //determine knockback direction(push away from winds position)
                     Vector2 knockBackDirection = (windCollide.transform.position - transform.position).normalized;
-                    knockBackDirection.y = 0; //dont knock in vertical
+                    knockBackDirection.y = Mathf.Clamp(knockBackDirection.y,0.6f,1f); //slight vertical force
 
                     //apply force
                     enemyRb.AddForce(knockBackDirection* knockBackForce, ForceMode2D.Impulse);
@@ -46,5 +46,25 @@ public class WindForce : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        else if (windCollide.CompareTag("WallTorch"))//extinguish torch if hit
+        {
+            //find wall torch component
+            WallTorchLight torchLit = windCollide.GetComponent<WallTorchLight>();
+
+            if(torchLit !=null)
+            {
+                //if it finds component, extinguish torch
+                torchLit.Extinguish(); //turn off torch
+                Destroy(gameObject); //destory wind attack
+
+            }
+            else
+            {
+                Debug.LogError("walltorchlight component missing");
+                Destroy(gameObject); //destroy even if 
+            }
+        }
+    
     }
 }

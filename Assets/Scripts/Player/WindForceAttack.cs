@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WindForceAttack : MonoBehaviour
 {
-    [SerializeField] float attackDelay = 0.3f; //space between attacks
+    [SerializeField] float attackDelay = 0.5f; //space between attacks
     [SerializeField] GameObject windAttackPrefab; //place for wind object
     [SerializeField] Transform windProjectileSpawnPoint; //where it shoots from
     [SerializeField] float windSpeed = 8f; //speed of wind force
@@ -47,9 +47,10 @@ public class WindForceAttack : MonoBehaviour
         if(direction == -1)
         {
             windforce.transform.localScale = new Vector3(-1,1,1);
-
-            yield return new WaitForSeconds(attackDelay); //wait for cooldown
-            canAttack = true;
         }
+
+        yield return new WaitForSeconds(attackDelay); //wait for cooldown
+        canAttack = true;
+        
     }
 }

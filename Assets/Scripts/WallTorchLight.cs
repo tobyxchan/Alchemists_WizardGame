@@ -16,6 +16,8 @@ public class WallTorchLight : MonoBehaviour
     [SerializeField] private Sprite wallTorchOn;
     [SerializeField] private Sprite wallTorchOff;
 
+    [SerializeField] private float fadeDuration = 0.3f; //time to faed out
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,16 +58,34 @@ public class WallTorchLight : MonoBehaviour
             animator.SetBool("isLit", true);
         }
     }
-        private void Extinguish()
+        public void Extinguish()
         {
+            if(!isLit) return; //if extinguished do nothing
+            isLit = false;
+            spriteRenderer.sprite = wallTorchOff;
+            animator.SetBool("isLit",false);
+
             if(torchLight !=null)
             {
-                torchLight.intensity = 0f; //turn off light
-                isLit = false; //allow it to be re lit
-
-                spriteRenderer.sprite = wallTorchOff; //switch to off sprite
-                animator.SetBool("isLit", false);
+                StartCoroutine(FadeOutLight()); //smothly fade light
             }
+        }
+
+        private IEnumerator FadeOutLight()
+        {
+            float startIntensity = torchLight.intensity;
+            float elapsedTime = 0f;
+
+            //continue to fade until duration finished
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                torchLight.intensity = Mathf.Lerp(startIntensity,0f,elapsedTime/fadeDuration);
+                yield return null;
+
+            }
+
+            torchLight.intensity = 0f; //ensure fully off
         }
     
 }
