@@ -42,10 +42,12 @@ public class Enemy : MonoBehaviour
     //method to deal damage to enemy. if enemy reaches 0 health they die
     public void TakeDamage(int damage)
     {
-        enemyMaxHealth -= damage;
-        Debug.Log($"Enemy took {damage} damage");
+        currentEnemyHealth = Mathf.Max(0, currentEnemyHealth - damage); //reduce current by damage
 
-        if(enemyMaxHealth <=0)
+        Debug.Log($"Enemy took {damage} damage, remaining health: {currentEnemyHealth}");
+
+//kill if 0 health
+        if(currentEnemyHealth <=0)
         {
             Die();
         }

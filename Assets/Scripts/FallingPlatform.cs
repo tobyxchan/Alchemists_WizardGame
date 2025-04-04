@@ -12,13 +12,18 @@ public class FallingPlatform : MonoBehaviour
 
     [SerializeField] private float crumbleDelay = 1f;//time before falling
     
+
     [SerializeField] private Animator animator;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+
     }
 
    private void OnCollisionEnter2D(Collision2D floorCollide)
@@ -47,4 +52,5 @@ public class FallingPlatform : MonoBehaviour
     boxCollider.enabled = false;
 
    }
+
 }
