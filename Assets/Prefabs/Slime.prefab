@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2412890273822302589}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.004, z: 0}
   m_LocalScale: {x: 0.99697804, y: 0.98967296, z: 1.1202}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000093f66d2e
-  m_LightCookieSprite: {fileID: 21300000, guid: 4d7cc9585991a6b4897eac70e71985b2, type: 3}
+  m_LightCookieSprite: {fileID: 21300000, guid: 2a9e40737b808c842a866b9d6c5a3611, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.5, y: 0.25, z: 0}
+    m_Center: {x: 0, y: -0.15625, z: 0}
+    m_Extent: {x: 0.484375, y: 0.34375, z: 0}
   m_PointLightInnerAngle: 360.00003
   m_PointLightOuterAngle: 360.00003
   m_PointLightInnerRadius: 0.03
@@ -253,7 +253,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -373,7 +373,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6790541545183798185}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 61e5133266593ca46973cbd3bbd24a31, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

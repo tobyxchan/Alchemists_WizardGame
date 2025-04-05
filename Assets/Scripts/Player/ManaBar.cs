@@ -16,12 +16,7 @@ public class ManaBar : MonoBehaviour
     void Start()
     {
 
-        //find slider dynamically
-        if(manaBar ==null)
-        {
-            manaBar = GameObject.Find("ManaBar").GetComponent<Slider>();
-        }
-        
+        manaBar = GameManager.instance?.manaSlider;
         currentMana = maxMana;
         UpdateManaBar();
         StartCoroutine(RegenerateMana());

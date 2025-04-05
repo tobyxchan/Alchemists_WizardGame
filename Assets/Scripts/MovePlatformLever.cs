@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MovePlatformLever : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class MovePlatformLever : MonoBehaviour
 
     [SerializeField] private MovingPlatform platform; //ref to platform
 
+    [SerializeField] private GameObject pressE; 
+
+
     private SpriteRenderer spriteRenderer;
     
 
@@ -21,6 +25,8 @@ public class MovePlatformLever : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = leverOffSprite; //set default to off
+
+        pressE.SetActive(false); //hide at start
 
     }
 
@@ -36,8 +42,6 @@ public class MovePlatformLever : MonoBehaviour
     {
         isActivated = true;
         spriteRenderer.sprite = leverOnSprite; //change lever to on sprite
-        platform.gameObject.SetActive(true); //activate platform
-
         platform.StartMoving();
 
     }
@@ -46,6 +50,7 @@ public class MovePlatformLever : MonoBehaviour
     if(leverCollide.CompareTag("Player"))
 
     {
+        pressE.SetActive(true); //show press e
         playerInRange = true;
     }
   }
@@ -55,6 +60,7 @@ public class MovePlatformLever : MonoBehaviour
     if(leverExit.CompareTag("Player"))
     {
         playerInRange = false;
+        pressE.SetActive(false); //hide text
     }
   }
 }

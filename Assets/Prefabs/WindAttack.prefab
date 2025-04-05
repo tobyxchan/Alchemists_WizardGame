@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windDamage: 1
   lifetime: 2
-  knockBackForce: 2
+  knockBackForce: 20
 --- !u!95 &8668940328396582151
 Animator:
   serializedVersion: 5

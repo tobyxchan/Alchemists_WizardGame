@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private Vector3 startingPosition;
 
+    public Slider manaSlider;
+
     //score system
     public int score = 0;
     public TextMeshProUGUI scoreText; //ui ref to display score

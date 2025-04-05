@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] private Transform pointA; //first point
-    [SerializeField] private Transform pointB; //second point
-    [SerializeField] private float speed = 3f; //move speed 
+    //setup invisible markers
+    public GameObject posA;
+    public GameObject posB;
 
-    private Vector3 targetPosition; 
- 
+   //how long move takes
+   [SerializeField] float duration =4f;
 
-    // Start is called before the first frame update
-    void Start()
+   private Vector3 startPoint;
+   private Vector3 endPoint;
+   float elapsedTime = 0f;
+   private bool isMoving = false; 
+
+
+    private void Start()
     {
-        targetPosition = pointB.position; //start at point a towards b
-        gameObject.SetActive(false); //start disabled
+        startPoint = posA.transform.position;
+        endPoint = posB.transform.position;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.activeSelf)// only move if active
+
+        if(!isMoving) return; //only move if activated
+
+        //counts up how long the move has been going
+        elapsedTime += Time.deltaTime;
+
+        float tS = elapsedTime /duration;
+
+        transform.position = Vector3.Lerp(startPoint, endPoint, tS);
+
+        if(tS >=1f)
+        {
+            //swap transforms
+            (startPoint,endPoint) = (endPoint, startPoint);
+            elapsedTime = 0f;
+        }
         
-       transform.position = Vector3.MoveTowards(transform.position,targetPosition, speed * Time.deltaTime);
-
-       //switch traget when raching point
-       if(Vector3.Distance(transform.position, targetPosition) < 0.1f)
-       {
-        targetPosition = (targetPosition == pointA.position) ? pointB.position : pointA.position;
-       }
     }
+    
 
-    public void StartMoving()
+    public void StartMoving() //called by lever
     {
-        gameObject.SetActive(true); //activate platform
+        isMoving = true;
     }
-
 }
