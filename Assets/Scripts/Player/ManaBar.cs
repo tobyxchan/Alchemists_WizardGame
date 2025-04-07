@@ -60,5 +60,10 @@ public class ManaBar : MonoBehaviour
         manaBar.value = (float)currentMana / maxMana;
       }
     }
-    
+
+    public void RefillMana()
+    {
+        currentMana = maxMana; 
+        UpdateManaBar();
+    }    
 }

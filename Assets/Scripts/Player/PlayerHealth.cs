@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 
-    public int maxHearts = 20; //max health count
+    public int maxHearts = 10; //max health count
     public int currentHearts; //current health count
 
     [SerializeField] Sprite heartFull;
