@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool hasPlayerWon = false;
     private bool hasRecievedInput = false;
 
+
     private void Awake()
     {
         // Initialize the game manager and make it persistent between scenes
@@ -56,6 +57,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // Reassign manaSlider from scene if needed
+        Slider foundManaSlider = GameObject.Find("ManaSlider")?.GetComponent<Slider>();
+        if (foundManaSlider != null)
+        {
+           manaSlider = foundManaSlider;
+        }
+
         player = GameObject.FindWithTag("Player");
         if (player != null)
         {
@@ -75,7 +83,10 @@ public class GameManager : MonoBehaviour
             UpdateScoreUI();
         }
 
+
         StartInfo();
+
+
     }
 
     private void Update()
@@ -145,6 +156,8 @@ public class GameManager : MonoBehaviour
             // Restart level after a short delay
             StartCoroutine(RestartSceneAfterDelay(2f));
         }
+
+     
     }
 
 //delay respawn to allow a moment after death to display text and set health to 0

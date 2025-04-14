@@ -9,7 +9,7 @@ public void OnTriggerEnter2D (Collider2D manaCollide)
 {
     if(manaCollide.CompareTag("Player"))
     {
-        ManaBar manaBar = GetComponent<ManaBar>();
+        ManaBar manaBar = manaCollide.GetComponent<ManaBar>();
         if(manaBar !=null)
         {
             manaBar.RefillMana(); //call method to fill

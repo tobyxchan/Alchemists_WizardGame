@@ -10,6 +10,8 @@ public class LevelFinish : MonoBehaviour
 
     private bool playerInRange = false;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,9 @@ public class LevelFinish : MonoBehaviour
         playerSprite.enabled = false;
         pressEText.SetActive(false);
         levelCompleteText.SetActive(true);
+
+
+
 
     }
 }

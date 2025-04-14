@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
     float horizontalMovement;
+   
 
     [Header("Facing Direction")]
     public int facingDirection = 1; // 1 for right, -1 for left
@@ -46,11 +47,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
         Gravity();
         
         //reset jumps when hit ground
-        if(isGrounded())
+        if(isGrounded() && rb.velocity.y <0)
         {
             jumpCount = 0;
         }
@@ -85,6 +88,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     public void MovementScript(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;
@@ -93,16 +97,18 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+
         if (context.performed && jumpCount < maxJumps)
         {
             // If held down, jump at full power
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             jumpCount++;
         }
+            
             // If not held down button, perform a smaller jump
-            else if (context.canceled && jumpCount < maxJumps)
+        if (context.canceled && rb.velocity.y > 0 )
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.75f);
         }
 
         // Play Jump SFX
@@ -112,11 +118,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded()
     {
-        if (Physics2D.OverlapBox(groundCheckPosition.position, groundCheckSize, 0, groundLayer))
-        {
-            return true;
-        }
-        return false;
+        RaycastHit2D hit = Physics2D.BoxCast( groundCheckPosition.position, groundCheckSize,0f,Vector2.down,0.25f,groundLayer);
+        return hit.collider !=null;
     }
 
 

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ManaBar : MonoBehaviour
 {
 
-    public int maxMana = 100;
-    private int currentMana;
+    public float maxMana = 100;
+    private float currentMana;
 
     public float manaRegenerate = 10f; //restore per second
     public Slider manaBar; //image UI ref
@@ -40,13 +40,13 @@ public class ManaBar : MonoBehaviour
     {
         while (true)
         {
-            //wait 1 second per tick
-            yield return new WaitForSeconds(1f);
+            //wait one frame
+            yield return null;
 
             //if less than max - repeat and update UI
             if(currentMana < maxMana)
             {
-                currentMana +=(int)manaRegenerate;
+                currentMana += manaRegenerate * Time.deltaTime;
                 if(currentMana > maxMana) currentMana = maxMana;
                 UpdateManaBar();
             }
