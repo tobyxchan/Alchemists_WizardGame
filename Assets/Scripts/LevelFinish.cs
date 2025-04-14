@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelFinish : MonoBehaviour
 {
     [SerializeField] private GameObject pressEText; //tells you to press u
-    [SerializeField] private GameObject levelCompleteText; //UI text for level complete
     [SerializeField] private SpriteRenderer playerSprite; //ref to player
+    [SerializeField] private Image winLogo; //win logo ref
+
+    private Animator winLogoAnimator;
 
     private bool playerInRange = false;
 
@@ -16,7 +19,8 @@ public class LevelFinish : MonoBehaviour
     void Start()
     {
         pressEText.SetActive(false); //start in off position
-        levelCompleteText.SetActive(false);//set in off position
+        winLogo.gameObject.SetActive(false);//set in off position
+        winLogoAnimator = winLogo.GetComponent<Animator>();
 
     }
 
@@ -54,7 +58,12 @@ public class LevelFinish : MonoBehaviour
     {
         playerSprite.enabled = false;
         pressEText.SetActive(false);
-        levelCompleteText.SetActive(true);
+
+        winLogo.gameObject.SetActive(true);
+        if(winLogoAnimator !=null)
+        {
+            winLogoAnimator.SetTrigger("PlayWin"); //trigger anim
+        }
 
 
 

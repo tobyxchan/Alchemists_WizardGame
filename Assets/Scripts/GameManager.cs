@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     //score system
     public int score = 0;
     public TextMeshProUGUI scoreText; //ui ref to display score
-    public TextMeshProUGUI deathMessageText; //ref to death text
     public TextMeshProUGUI startInfoText; //level start info text
+
+    public Image deathImage;
 
     private PlayerHealth playerHealth;
     public GameObject mainUI;
@@ -73,10 +74,10 @@ public class GameManager : MonoBehaviour
             //store start pos
             startingPosition = player.transform.position;
 
-            // Hide death text
-            if (deathMessageText != null)
+            // Hide death image
+            if (deathImage != null)
             {
-                deathMessageText.gameObject.SetActive(false);
+                deathImage.gameObject.SetActive(false);
             }
 
             score = 0;
@@ -147,10 +148,10 @@ public class GameManager : MonoBehaviour
             player.GetComponent<SpriteRenderer>().enabled = false;
 
             // Show death message
-            if (deathMessageText != null)
+            if (deathImage != null)
             {
-                deathMessageText.gameObject.SetActive(true);
-                deathMessageText.text = "You Died"; // Death text
+                deathImage.gameObject.SetActive(true);
+        
             }
 
             // Restart level after a short delay
