@@ -74,6 +74,13 @@ public class GameManager : MonoBehaviour
             //store start pos
             startingPosition = player.transform.position;
 
+            //re enable movement
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if(pc !=null)
+            {
+                pc.canMove = true;
+            }
+
             // Hide death image
             if (deathImage != null)
             {
@@ -146,6 +153,9 @@ public class GameManager : MonoBehaviour
         {
             // Disable sprite on death
             player.GetComponent<SpriteRenderer>().enabled = false;
+
+            //disable movement
+            player.GetComponent<PlayerController>().canMove = false;
 
             // Show death message
             if (deathImage != null)

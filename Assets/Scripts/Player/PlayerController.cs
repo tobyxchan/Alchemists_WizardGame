@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
     float horizontalMovement;
+    public bool canMove = true;
    
 
     [Header("Facing Direction")]
@@ -48,6 +49,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        if(!canMove)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y); //stop movement
+            return; //dont process movement
+        }
 
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
         Gravity();

@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     private GameObject player; // ref to player
     private AudioSource audioSource; // ref to audio source
 
+    private GameManager gameManager; //manager ref
+
     private bool isWalking = false;//track movement
 
     [SerializeField] LayerMask groundLayerMask;//ground layer assigning
@@ -35,6 +37,8 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>(); //get rigid body
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         audioSource = GetComponent<AudioSource>();
+
+        gameManager = GameObject.Find("Managers").GetComponent<GameManager>();
 
         currentEnemyHealth = enemyMaxHealth; //set to max at start
     }
@@ -58,6 +62,13 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        //stop player tracking once won
+        if(gameManager.hasPlayerWon)
+        {
+            Idle();
+            return;
+        }
+
         //if within detection range of player, move to player
         //the distance is calculated by comparing player and enemy positions
         //must be on same y axis and within x axis range

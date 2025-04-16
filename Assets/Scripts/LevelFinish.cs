@@ -13,6 +13,8 @@ public class LevelFinish : MonoBehaviour
 
     private bool playerInRange = false;
 
+    private GameManager gameManager;
+
 
 
     // Start is called before the first frame update
@@ -21,6 +23,8 @@ public class LevelFinish : MonoBehaviour
         pressEText.SetActive(false); //start in off position
         winLogo.gameObject.SetActive(false);//set in off position
         winLogoAnimator = winLogo.GetComponent<Animator>();
+
+        gameManager = GameObject.Find("Managers").GetComponent<GameManager>();
 
     }
 
@@ -56,6 +60,8 @@ public class LevelFinish : MonoBehaviour
 //temporary level complete setup for functioning prototype
     private void CompleteLevel()
     {
+        gameManager.hasPlayerWon = true;
+        
         playerSprite.enabled = false;
         pressEText.SetActive(false);
 
@@ -65,6 +71,13 @@ public class LevelFinish : MonoBehaviour
             winLogoAnimator.SetTrigger("PlayWin"); //trigger anim
         }
 
+        //disable movement
+        GameObject player = GameObject.FindWithTag("Player");
+
+        if(player !=null)
+        {
+            player.GetComponent<PlayerController>().canMove = false;
+        }
 
 
 
