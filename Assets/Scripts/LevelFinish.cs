@@ -16,8 +16,6 @@ public class LevelFinish : MonoBehaviour
     private GameManager gameManager;
 
 
-
-    // Start is called before the first frame update
     void Start()
     {
         pressEText.SetActive(false); //start in off position
@@ -28,7 +26,7 @@ public class LevelFinish : MonoBehaviour
 
     }
 
-//if player enters trigger zone, "press E" text shows and sets in range to true
+    //if player enters trigger zone, "press E" text shows and sets in range to true
     private void OnTriggerEnter2D(Collider2D doorCollide)
     {
         if(doorCollide.CompareTag("Player"))
@@ -38,7 +36,7 @@ public class LevelFinish : MonoBehaviour
         }
     }
 
-//if you leave trigger zone it removes text and wont allow interaction
+    //if you leave trigger zone it removes text and wont allow interaction
     private void OnTriggerExit2D(Collider2D doorNoCollide)
     {
         if(doorNoCollide.CompareTag("Player"))
@@ -53,33 +51,23 @@ public class LevelFinish : MonoBehaviour
         if(playerInRange && Input.GetKeyDown(KeyCode.E))
         {
             CompleteLevel();
-
         }
     }
 
-//temporary level complete setup for functioning prototype
+    //temporary level complete setup for functioning prototype
     private void CompleteLevel()
     {
         gameManager.hasPlayerWon = true;
-        
-        playerSprite.enabled = false;
         pressEText.SetActive(false);
+
+        //disable player and UI
+        GameObject.FindWithTag("Player").SetActive(false);
+        GameObject.Find("MainUI").SetActive(false);
 
         winLogo.gameObject.SetActive(true);
         if(winLogoAnimator !=null)
         {
             winLogoAnimator.SetTrigger("PlayWin"); //trigger anim
         }
-
-        //disable movement
-        GameObject player = GameObject.FindWithTag("Player");
-
-        if(player !=null)
-        {
-            player.GetComponent<PlayerController>().canMove = false;
-        }
-
-
-
     }
 }

@@ -9,6 +9,12 @@ TagManager:
   - Enemy
   - SFXPlayer
   - MusicPlayer
+  - Fireball
+  - Environment
+  - Trap
+  - WallTorch
+  - GameplayUI
+  - CanvasUI
   layers:
   - Default
   - TransparentFX
