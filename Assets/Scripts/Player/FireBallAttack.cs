@@ -18,6 +18,8 @@ public class FireBallAttack : MonoBehaviour
 
     private ManaBar manaBar; //ref to mana script
 
+    private Animator animator;
+
     [SerializeField] private AudioClip fireballSFX;
 
     void Start()
@@ -25,6 +27,7 @@ public class FireBallAttack : MonoBehaviour
         player = GetComponent<PlayerController>(); // Ref to player script
         audioSource = GetComponent<AudioSource>(); // Ref to audio source
         manaBar = GetComponent<ManaBar>(); //ref to mana
+        animator = GetComponent<Animator>();
     }
 
 
@@ -36,6 +39,7 @@ public class FireBallAttack : MonoBehaviour
             
             {
                 StartCoroutine(FireAttack());
+                animator.SetTrigger("fireAttack");
             }
             else
             {

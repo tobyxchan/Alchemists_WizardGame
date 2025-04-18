@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7881153168699128325}
   - component: {fileID: 5525906651045212497}
   - component: {fileID: 4833822548524229834}
+  - component: {fileID: -7427270620608286038}
+  - component: {fileID: -1249648305242222003}
   m_Layer: 7
   m_Name: ManaPotion
   m_TagString: Collectible
@@ -133,3 +135,39 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.017783165}
   serializedVersion: 2
   m_Radius: 0.26778316
+--- !u!111 &-7427270620608286038
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215109272142155724}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &-1249648305242222003
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215109272142155724}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 17ac0ff8d0c9d28428c735653ca56796, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

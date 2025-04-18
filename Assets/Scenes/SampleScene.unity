@@ -3671,7 +3671,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 2.85
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000093f66d2e
@@ -55809,6 +55809,10 @@ PrefabInstance:
       propertyPath: manaBar
       value: 
       objectReference: {fileID: 1788689138}
+    - target: {fileID: 2471462084034503135, guid: 7593bd822268f8643896e937e0eeb8c5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2881039206489487209, guid: 7593bd822268f8643896e937e0eeb8c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.84

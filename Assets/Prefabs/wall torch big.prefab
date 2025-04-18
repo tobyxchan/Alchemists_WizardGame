@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5817530114024275505}
   m_Layer: 0
   m_Name: wall torch big
-  m_TagString: Untagged
+  m_TagString: WallTorch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallTorchOn: {fileID: 21300000, guid: bb91bef9dd5204e40bc073974fd4fb2c, type: 3}
   wallTorchOff: {fileID: 21300000, guid: b735a99d3f5e16d41b9bacefa9ea3471, type: 3}
+  fadeDuration: 0.3
 --- !u!95 &5817530114024275505
 Animator:
   serializedVersion: 5

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     // References to Components
     public Rigidbody2D rb;
     private AudioSource audioSource;
+    private Animator animator;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -75,6 +77,12 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
             facingDirection = 1;   // Player facing right
         }
+
+
+        //animation set running to true
+        bool isMoving = Mathf.Abs(horizontalMovement) > 0.1f;
+        animator.SetBool("isRunning", isMoving && isGrounded());
+        
         
     }
 
