@@ -12,6 +12,8 @@ public class HeartCollect : MonoBehaviour
 
     [SerializeField] private AudioClip heartSFX;
 
+    [SerializeField] private GameObject healthCollectParticle;
+
 
     void Awake()
     {
@@ -25,12 +27,18 @@ public class HeartCollect : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D heartCollider)
     {
+
         // Get health
         PlayerHealth playerHealth = heartCollider.GetComponent<PlayerHealth>();
         PlayerController player = heartCollider.GetComponent<PlayerController>();
 
         if(heartCollider.CompareTag("Player"))// If player collects
         {
+            //particle sim
+        if(healthCollectParticle != null)
+        {
+            Instantiate(healthCollectParticle,transform.position, Quaternion.identity);
+        }
             if(playerHealth !=null)
             {
                 // Heal by collect value

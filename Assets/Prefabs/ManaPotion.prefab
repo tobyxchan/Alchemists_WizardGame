@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6d7c6632863c644a0fa9d0bc1d6240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manaParticlePrefab: {fileID: 9042238518774368672, guid: c12708c6d9ececa4b817946d2b7c6808, type: 3}
 --- !u!58 &4833822548524229834
 CircleCollider2D:
   m_ObjectHideFlags: 0

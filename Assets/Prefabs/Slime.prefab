@@ -191,6 +191,7 @@ MonoBehaviour:
   detectionRange: 7
   attackSpacing: 1
   currentEnemyHealth: 0
+  deathParticlePrefab: {fileID: 2646524904634562815, guid: 55ed87ec1a67fd94aac6fd7d826dd936, type: 3}
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8

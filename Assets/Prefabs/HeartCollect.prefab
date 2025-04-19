@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartValue: 3
   heartSFX: {fileID: 8300000, guid: 3115f1cc5bdf41a4ca5ba2c0e407e82f, type: 3}
+  healthCollectParticle: {fileID: 2916212322881725501, guid: 3df1adcd69eb80143b5a7b094872e614, type: 3}
 --- !u!58 &7263420161717860892
 CircleCollider2D:
   m_ObjectHideFlags: 0

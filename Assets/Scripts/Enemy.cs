@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     private float lastDamageTime = 0f; //track when last damage dealt
     public int currentEnemyHealth; //enemy current health
 
+    [SerializeField] private GameObject deathParticlePrefab;
+
     
 
     // References
@@ -154,6 +156,11 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        //spawn particle sim
+        if(deathParticlePrefab !=null)
+        {
+            Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 }
