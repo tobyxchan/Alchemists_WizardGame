@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelFinish : MonoBehaviour
 {
     [SerializeField] private GameObject pressEText; //tells you to press u
     [SerializeField] private SpriteRenderer playerSprite; //ref to player
     [SerializeField] private Image winLogo; //win logo ref
+    
+    [SerializeField] private Button restartLevel;
+
+    [SerializeField] private Button nextLevel;
+
 
     private Animator winLogoAnimator;
 
@@ -24,6 +30,8 @@ public class LevelFinish : MonoBehaviour
 
         gameManager = GameObject.Find("Managers").GetComponent<GameManager>();
 
+        restartLevel.gameObject.SetActive(false);
+        nextLevel.gameObject.SetActive(false);
     }
 
     //if player enters trigger zone, "press E" text shows and sets in range to true
@@ -69,5 +77,18 @@ public class LevelFinish : MonoBehaviour
         {
             winLogoAnimator.SetTrigger("PlayWin"); //trigger anim
         }
+
+        restartLevel.gameObject.SetActive(true);
+        nextLevel.gameObject.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
