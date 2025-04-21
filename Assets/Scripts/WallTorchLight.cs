@@ -8,7 +8,7 @@ public class WallTorchLight : MonoBehaviour
 
     private Light2D torchLight; //ref to torch light
 
-    private bool isLit = false; //track if lit or not
+    public bool isLit = false; //track if lit or not
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;

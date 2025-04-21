@@ -7,6 +7,8 @@ public class GreenGemCollect : MonoBehaviour
     [Header("Sound Effects")]
     private AudioSource audioSource;
     [SerializeField] private AudioClip gemSFX;
+
+    [SerializeField] private GameObject gemParticle;
     
     
     void Awake()
@@ -19,6 +21,8 @@ public class GreenGemCollect : MonoBehaviour
     {
         if(gemCollide.CompareTag("Player"))
         {
+            Instantiate(gemParticle,transform.position, Quaternion.identity);
+
             GameManager.instance.AddScore(1);
             SoundFXManager.instance.PlaySoundFXClip(gemSFX, transform, 1f);
             Destroy(gameObject);

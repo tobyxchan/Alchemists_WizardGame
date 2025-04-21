@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gemSFX: {fileID: 8300000, guid: 5bf4b92a1cd9ef847b5611d907ffd140, type: 3}
+  gemParticle: {fileID: 3802797769528224270, guid: 75ade035c80bedb40bbebba529accbc7, type: 3}
 --- !u!70 &3069233261918132616
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

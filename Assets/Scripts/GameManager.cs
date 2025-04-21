@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
         else
@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
         {
            manaSlider = foundManaSlider;
         }
+
+
 
         player = GameObject.FindWithTag("Player");
         if (player != null)

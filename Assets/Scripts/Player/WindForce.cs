@@ -47,17 +47,19 @@ public class WindForce : MonoBehaviour
             Destroy(gameObject);
         }
 
-        else if (windCollide.CompareTag("WallTorch"))//extinguish torch if hit
+        else if (windCollide.CompareTag("WallTorch") )//extinguish torch if hit
         {
             //find wall torch component
             WallTorchLight torchLit = windCollide.GetComponent<WallTorchLight>();
 
             if(torchLit !=null)
             {
+                if(torchLit.isLit)
+                {
                 //if it finds component, extinguish torch
                 torchLit.Extinguish(); //turn off torch
                 Destroy(gameObject); //destory wind attack
-
+                }
             }
             else
             {
