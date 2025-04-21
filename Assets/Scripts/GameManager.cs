@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to scene loaded event
         }
         else
@@ -42,6 +42,16 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -56,6 +66,11 @@ public class GameManager : MonoBehaviour
             {
                 DontDestroyOnLoad(mainUI);  // Keep the MainUI between scenes
             }
+        }
+
+        if(mainUI != null)
+        {
+            mainUI.SetActive(true); //force enable main ui
         }
 
         // Reassign manaSlider from scene if needed

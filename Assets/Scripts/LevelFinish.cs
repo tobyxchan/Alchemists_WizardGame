@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelFinish : MonoBehaviour
 {
@@ -14,12 +15,19 @@ public class LevelFinish : MonoBehaviour
 
     [SerializeField] private Button nextLevel;
 
+    [SerializeField] private TextMeshProUGUI finalTimeText; //text ref for final time
+    private LevelTimer levelTimer; //level timer object link
+
+    [SerializeField] private TextMeshProUGUI finalScoreText; //ref to final score
+
 
     private Animator winLogoAnimator;
 
     private bool playerInRange = false;
 
     private GameManager gameManager;
+    
+    [SerializeField] private GameObject mainUI;
 
 
     void Start()
@@ -28,10 +36,16 @@ public class LevelFinish : MonoBehaviour
         winLogo.gameObject.SetActive(false);//set in off position
         winLogoAnimator = winLogo.GetComponent<Animator>();
 
-        gameManager = GameObject.Find("Managers").GetComponent<GameManager>();
+        gameManager =GameManager.instance;
 
         restartLevel.gameObject.SetActive(false);
         nextLevel.gameObject.SetActive(false);
+
+        levelTimer = FindObjectOfType<LevelTimer>();
+        finalTimeText.gameObject.SetActive(false); //start in off position until win level
+
+        finalScoreText.gameObject.SetActive(false); //start in off until win
+    
     }
 
     //if player enters trigger zone, "press E" text shows and sets in range to true
@@ -70,7 +84,11 @@ public class LevelFinish : MonoBehaviour
 
         //disable player and UI
         GameObject.FindWithTag("Player").SetActive(false);
-        GameObject.Find("MainUI").SetActive(false);
+
+        if(mainUI !=null)
+        {
+        mainUI.SetActive(false);
+        }
 
         winLogo.gameObject.SetActive(true);
         if(winLogoAnimator !=null)
@@ -78,8 +96,23 @@ public class LevelFinish : MonoBehaviour
             winLogoAnimator.SetTrigger("PlayWin"); //trigger anim
         }
 
+        //activate level complete buttons
         restartLevel.gameObject.SetActive(true);
         nextLevel.gameObject.SetActive(true);
+
+        //level score and time
+        levelTimer.StopTimer(); //stop clock
+
+        string finalTime = levelTimer.GetElapsedTime(); //get final time
+        finalTimeText.text = "Time: " + finalTime;
+        finalTimeText.gameObject.SetActive(true); // show time text
+
+        if(finalScoreText !=null)
+        {
+            //activate and display final score pulled from manager
+            finalScoreText.gameObject.SetActive(true); 
+            finalScoreText.text = "Gems: " + gameManager.score.ToString();
+        }
     }
 
     public void RestartLevel()
