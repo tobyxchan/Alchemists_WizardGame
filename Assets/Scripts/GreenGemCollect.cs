@@ -9,8 +9,8 @@ public class GreenGemCollect : MonoBehaviour
     [SerializeField] private AudioClip gemSFX;
 
     [SerializeField] private GameObject gemParticle;
-    
-    
+
+ 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();

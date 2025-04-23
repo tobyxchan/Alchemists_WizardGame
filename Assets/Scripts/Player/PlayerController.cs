@@ -25,9 +25,15 @@ public class PlayerController : MonoBehaviour
     private int jumpCount =0; //tracks jumps
     private int maxJumps = 2;//allow only 2 jumps
 
+    float jumpDir;
+
+    const float JUMP_DIR_GROUNDED = 0.5f; //fixed values for jump direction
+    const float JUMP_DIR_UPWARDS = 1f;
+    const float JUMP_DIR_DOWNWARDS = 0f;
+
     [Header("Ground Check")]
     public Transform groundCheckPosition;
-    public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
+    public Vector2 groundCheckSize = new Vector2(0.8f, 0.05f);
     public LayerMask groundLayer;
 
     [Header("Gravity")]
@@ -60,7 +66,7 @@ public class PlayerController : MonoBehaviour
         Gravity();
         
         //reset jumps when hit ground
-        if(isGrounded() && rb.velocity.y <0)
+        if(IsGrounded() && rb.velocity.y <0)
         {
             jumpCount = 0;
         }
@@ -80,12 +86,34 @@ public class PlayerController : MonoBehaviour
 
         //animation set running to true
         bool isMoving = Mathf.Abs(horizontalMovement) > 0.1f;
-        animator.SetBool("isRunning", isMoving && isGrounded());
+        animator.SetBool("isRunning", isMoving && IsGrounded());
         
         
     }
 
+void FixedUpdate()
+    {
+        //update jumpDir based on vertical velocity and ground state
+        if (IsGrounded())
+        {
+            jumpDir = JUMP_DIR_GROUNDED;
+        }
+        else
+        {
+            if (rb.velocity.y > 0f)
+            {
+                jumpDir = JUMP_DIR_UPWARDS;
+            }
+            else
+            {
+                jumpDir = JUMP_DIR_DOWNWARDS;
+            }
+        }
 
+        //set jumpDir parameter in the animator
+        animator.SetFloat("jumpDir", jumpDir);
+    }
+    
     private void Gravity()
     {
         if(rb.velocity.y < 0)
@@ -129,9 +157,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast( groundCheckPosition.position, groundCheckSize,0f,Vector2.down,0.25f,groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast( groundCheckPosition.position, groundCheckSize,0f,Vector2.down,0.4f,groundLayer);
         return hit.collider !=null;
     }
 
