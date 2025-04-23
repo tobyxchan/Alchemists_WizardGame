@@ -1508,6 +1508,11 @@ MonoBehaviour:
   pressEText: {fileID: 1028311302}
   playerSprite: {fileID: 1825468997}
   winLogo: {fileID: 0}
+  restartLevel: {fileID: 0}
+  nextLevel: {fileID: 0}
+  finalTimeText: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  mainUI: {fileID: 0}
 --- !u!1 &144049394
 GameObject:
   m_ObjectHideFlags: 0
@@ -22882,6 +22887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 744390228}
   - component: {fileID: 744390227}
+  - component: {fileID: 744390229}
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -22994,12 +23000,24 @@ Transform:
   m_GameObject: {fileID: 744390226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.129916, y: 9.644032, z: -0.098352514}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &744390229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744390226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028335d3679228948af6d62cfe56660a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754360463
 GameObject:
   m_ObjectHideFlags: 0
@@ -57238,13 +57256,13 @@ SceneRoots:
   - {fileID: 1825468998}
   - {fileID: 592448217}
   - {fileID: 1804515087}
+  - {fileID: 744390228}
   - {fileID: 1840477410}
   - {fileID: 518424039}
   - {fileID: 2110112361}
   - {fileID: 1838217213}
   - {fileID: 1827183019}
   - {fileID: 119267500}
-  - {fileID: 744390228}
   - {fileID: 349433276}
   - {fileID: 489067555}
   - {fileID: 656102719}
