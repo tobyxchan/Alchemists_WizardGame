@@ -10,7 +10,8 @@ public class WindForceAttack : MonoBehaviour
     [SerializeField] float windSpeed = 8f; //speed of wind force
 
     private Animator animator;
-
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip windAttackSFX;
 
     private bool canAttack = true;
 
@@ -20,10 +21,9 @@ public class WindForceAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       player = GetComponent<PlayerController>(); //ref to player script
-
+        player = GetComponent<PlayerController>(); //ref to player script
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
@@ -56,6 +56,9 @@ public class WindForceAttack : MonoBehaviour
         {
             windforce.transform.localScale = new Vector3(-1,1,1);
         }
+
+        // Play SFX
+        SoundFXManager.instance.PlaySoundFXClip(windAttackSFX, transform, 1f);
 
         yield return new WaitForSeconds(attackDelay); //wait for cooldown
         canAttack = true;
