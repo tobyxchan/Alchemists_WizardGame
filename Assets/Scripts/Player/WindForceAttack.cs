@@ -9,6 +9,9 @@ public class WindForceAttack : MonoBehaviour
     [SerializeField] Transform windProjectileSpawnPoint; //where it shoots from
     [SerializeField] float windSpeed = 8f; //speed of wind force
 
+    private Animator animator;
+
+
     private bool canAttack = true;
 
     public int facingDirection = 1; //1 = right, -1 = lefft
@@ -18,6 +21,8 @@ public class WindForceAttack : MonoBehaviour
     void Start()
     {
        player = GetComponent<PlayerController>(); //ref to player script
+
+        animator = GetComponent<Animator>();
 
     }
 
@@ -38,6 +43,9 @@ public class WindForceAttack : MonoBehaviour
 
         //Get players direction
         int direction = player.facingDirection;
+
+        //anim
+        animator.SetBool("windAttack", true);
 
         //apply velocity
         Rigidbody2D rigid = windforce.GetComponent<Rigidbody2D>();

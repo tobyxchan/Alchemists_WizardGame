@@ -28,9 +28,13 @@ public class Enemy : MonoBehaviour
 
     private bool isWalking = false;//track movement
 
+    private Animator animator;
+
     [SerializeField] LayerMask groundLayerMask;//ground layer assigning
     [SerializeField] Transform groundCheck; //ref to groundcheck
     [SerializeField] private AudioClip damageSFX;
+
+
 
 
     void Start()
@@ -43,6 +47,8 @@ public class Enemy : MonoBehaviour
         gameManager = GameObject.Find("Managers").GetComponent<GameManager>();
 
         currentEnemyHealth = enemyMaxHealth; //set to max at start
+
+        animator = GetComponent<Animator>();
     }
 
     //method to deal damage to enemy. if enemy reaches 0 health they die
@@ -118,7 +124,7 @@ public class Enemy : MonoBehaviour
         if(!isWalking)
             {
             isWalking = true;
-           // animator.SetBool("isWalking", true);
+            animator.SetBool("isMoving", true);
             }
         }
     }
@@ -128,7 +134,7 @@ public class Enemy : MonoBehaviour
         if (isWalking)
         {
             isWalking = false;
-            //animator.SetBool("isWalking", false);
+            animator.SetBool("isMoving", false);
         }
     }
 
