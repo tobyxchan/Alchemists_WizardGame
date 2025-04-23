@@ -33960,7 +33960,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1840477408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11143cba6de88e9449064f895b83dc97, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ba047b92d2768a47bef6b6a6581f0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 8962106866031446293, guid: bcb903cf1d7c3e74d8c6cf62d9e35b35, type: 3}
@@ -56840,6 +56840,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2951218587000961210, guid: 7593bd822268f8643896e937e0eeb8c5, type: 3}
+      propertyPath: windAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7d1bd7afbf39a4141bcea222ebeaab48, type: 3}
     - target: {fileID: 6090027150649744736, guid: 7593bd822268f8643896e937e0eeb8c5, type: 3}
       propertyPath: m_Name
       value: Player
