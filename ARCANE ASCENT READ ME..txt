@@ -1,0 +1,21 @@
+ARCANE ASCENT READ ME.
+
+Arcane Ascent is a pixel style 2d platformer set in a castle overrun by slime monsters. You play as a wizard who must navigate the rooms of the castle, kill the slime creatures, avoid obstacles, collect gems and reach the door at the end of the room to progress to the next level. 
+
+The wizard can jump, double jump, shoot fire balls and wind attacks. The rooms are dark and must be lit up by shooting fire balls at the wall torches. A torch will stay lit for a brief amount of time and will extinguish. Strategically keep torches lit as you progress through the level to safely make your way to the end. 
+
+The fireball is the primary attack against enemies and deals the most damage. The wind attack will do low damage but knocks the enemy back and can knock them into traps. Be careful as the wind will also extinguish a torch if it collides with one. 
+
+Controls.
+
+A - move left
+
+D - move right
+
+Space - jump and double jump
+
+Left Mouse - fireball
+
+Right Mouse - wind attack
+
+E - interact
