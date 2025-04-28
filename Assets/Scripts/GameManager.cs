@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
         
             }
 
+
             // Restart level after a short delay
             StartCoroutine(RestartSceneAfterDelay(2f));
         }
@@ -193,12 +194,20 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
 
         // Reset health
         playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
             playerHealth.ResetHealth(); // Reset health and update UI
+        }
+
+        // Reset the timer to 0 when the player dies
+        LevelTimer levelTimer = FindObjectOfType<LevelTimer>();
+        if (levelTimer != null)
+        {
+            levelTimer.ResetTimer();  // Reset the timer
         }
     }
 }

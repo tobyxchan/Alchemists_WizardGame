@@ -11,7 +11,7 @@ public class FireBallAttack : MonoBehaviour
 
     [SerializeField] int manaCost = 20; //cost per shot
 
-    private bool canAttack = true; 
+    public bool canAttack = true; 
     public int facingDirection = 1;     // 1 = right, -1 = left
     private PlayerController player;    // ref to player
     private AudioSource audioSource;    // ref to audio source

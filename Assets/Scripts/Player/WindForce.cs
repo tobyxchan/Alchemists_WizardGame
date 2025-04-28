@@ -9,13 +9,27 @@ public class WindForce : MonoBehaviour
 
     [SerializeField] private float knockBackForce = 2f; //force of wind knockback
     
+    private ParticleSystem windParticleSystem;
+
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, lifetime); //destory after lifetime ends
-    }
+        // Find and play the particle effect if it exists
+        windParticleSystem = GetComponentInChildren<ParticleSystem>(); // Get the particle system from the child object
+        if (windParticleSystem != null)
+        {
+            windParticleSystem.Play(); // Play the wind trail particle effect
+        }
+        else
+        {
+            Debug.LogWarning("No particle system found on WindForce.");
+        }
 
-    private void OnTriggerEnter2D(Collider2D windCollide)
+        Destroy(gameObject, lifetime); // Destroy the wind force object after the lifetime ends
+    }
+    
+
+     void OnTriggerEnter2D(Collider2D windCollide)
     {
         if(windCollide.CompareTag("Enemy"))
         {
