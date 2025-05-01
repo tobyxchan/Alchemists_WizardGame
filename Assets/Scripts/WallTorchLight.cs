@@ -53,7 +53,7 @@ public class WallTorchLight : MonoBehaviour
         {
             isLit = true; 
             torchLight.intensity = 2f; //light torch
-            Invoke(nameof(Extinguish), 8f); //call extinguish method after 7 seconds
+            Invoke(nameof(Extinguish), 10f); //call extinguish method after 10 seconds
             spriteRenderer.sprite = wallTorchOn; //switch to on sprite
             animator.SetBool("isLit", true);
         }
